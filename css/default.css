@@ -1,0 +1,79 @@
+/* Font */
+@font-face {
+    font-family: "Abel";
+    font-style: normal;
+    font-weight: 400;
+    src: local("Abel"), local("Abel-Regular"), url(../font/abel.woff2) format("woff2");
+}
+
+/* Overloads of standard tags */
+* {
+    font-family: "Abel", sans-serif;
+}
+
+/* Bootstrap */
+body {
+    background-color: #EEE;
+    color: #212121;
+}
+
+a {
+    color: #414141;
+}
+
+a:focus,
+a:hover {
+    color: #717171;
+}
+
+.nav-pills > li.active > a,
+.nav-pills > li.active > a:focus,
+.nav-pills > li.active > a:hover {
+    background-color: #778F9B;
+}
+
+.navbar-default {
+    background-color: #778F9B;
+}
+
+.navbar-default .navbar-brand {
+    color: #FFF;
+}
+
+.navbar-default .navbar-brand:focus,
+.navbar-default .navbar-brand:hover {
+    color: rgba(255, 255, 255, 0.54);
+}
+
+.table > tbody tr {
+    background-color: #FFF;
+}
+
+.table-bordered {
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.table-centered > thead tr > th,
+.table-centered > tbody tr > td {
+    text-align: center;
+}
+
+.label {
+    margin-right: .3em;
+}
+
+.label-primary {
+    background-color: #5B6ABF;
+}
+
+.label-info {
+    background-color: #029AE4;
+}
+
+.form-group {
+    margin-bottom: 0;
+}
+
+.form-inline {
+    margin-bottom: 15px;
+}

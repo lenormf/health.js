@@ -1,0 +1,12 @@
+* use the style editor to download a customized version of bootstrap (colors, fonts, spacing etc)
+* only include elements we need in the local bootstrap (JS, CSS etc)
+* compatibility with most popular mobile browsers
+* pre-compile riot tags (the docs say the gain is very very slim though)
+
+* make a menu popup when pressing the bars icon
+* #food: when the screen size is very small (xs), the date is still aligned to the right although the rows expand on the entire screen
+* #food: the date and nutrition totals won't line up even when there's enough space for both to fit on the same line under small resolutions
+* #food: display a calendar when the date is clicked directly
+* #food: display the icon of the item type in the selection field
+* #food: display an error when item info is missing
+* #food: add more categories
