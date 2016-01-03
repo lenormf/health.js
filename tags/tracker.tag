@@ -40,6 +40,7 @@
                     <input type="number" class="form-control" id="newItemProteins" placeholder="proteins (units)">
                 </div>
                 <button type="submit" class="btn btn-primary col-xs-12 col-sm-1">add</button>
+                <div class="clearfix"></div>
             </form>
         </div>
 
