@@ -104,10 +104,21 @@ a:hover {
     background-color: #029AE4;
 }
 
+.label-warning {
+    background-color: #FF8000;
+}
+
 .form-group {
     margin-bottom: 0;
 }
 
 .form-inline {
     margin-bottom: 15px;
+}
+
+.btn-primary,
+.btn-primary:hover {
+    background: #3AF none repeat scroll 0% 0%;
+    box-shadow: 0px 1px 3px #178FE5 inset;
+    border: none;
 }
