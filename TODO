@@ -5,8 +5,8 @@
 
 * make a menu popup when pressing the bars icon
 * make fade-in transitions when the view changes
-* #food: when the screen size is very small (xs), the date is still aligned to the right although the rows expand on the entire screen
-* #food: the date and nutrition totals won't line up even when there's enough space for both to fit on the same line under small resolutions
+* FIXED #food: when the screen size is very small (xs), the date is still aligned to the right although the rows expand on the entire screen
+* WONTFIX #food: the date and nutrition totals won't line up even when there's enough space for both to fit on the same line under small resolutions
 * #food: display a calendar when the date is clicked directly
 * #food: display the icon of the item type in the selection field
 * #food: display an error when item info is missing

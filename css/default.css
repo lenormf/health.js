@@ -11,6 +11,22 @@
     font-family: "Abel", sans-serif;
 }
 
+#infoPanel .col-sm-6 {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+#infoPanel > #datePicker {
+    margin-top: .5em;
+}
+
+@media (min-width: 768px) {
+    #infoPanel > #datePicker {
+        text-align: right;
+        margin-top: 0;
+    }
+}
+
 #newItemForm input#newItemName,
 #newItemForm select#newItemCategory,
 #newItemForm input#newItemCalories,

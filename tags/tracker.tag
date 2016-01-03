@@ -2,15 +2,13 @@
     <div class="container-fluid">
         <div class="row-fluid">
             <div class="panel panel-default">
-                <div class="panel-body">
-<!-- FIXME: add CSS entry -->
-                    <div class="col-xs-12 col-sm-5" style="text-align: left;">
+                <div id="infoPanel" class="panel-body">
+                    <div class="col-sm-6">
                         <b>Totals:</b> <span class="label label-primary" title="{ reducerCalories() } kilo calories">{ reducerCalories() } kcal</span>
                         <span class="label label-info" title="{ reducerProteins() } protein units">{ reducerProteins() } u</span>
                     </div>
 
-<!-- FIXME: add CSS entry -->
-                    <div class="col-xs-12 col-sm-offset-2 col-sm-5" style="text-align: right;">
+                    <div id="datePicker" class="col-sm-6">
                         <a href="#" onclick={ shiftDayBackward }><i class="fa fa-fw fa-arrow-circle-left"></i></a>
                         <a href="#">{ dateNow.toDateString() }</a>
                         <a href="#" onclick={ shiftDayForward }><i class="fa fa-fw fa-arrow-circle-right"></i></a>
