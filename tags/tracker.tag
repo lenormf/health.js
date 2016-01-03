@@ -9,10 +9,10 @@
                     </div>
 
                     <div id="datePickerWrapper" class="col-sm-6">
-                        <a href="#" onclick={ shiftDayBackward } title="previous day"><i class="fa fa-fw fa-arrow-circle-left"></i></a>
-                        <a id="datePicker" href="#" title="pick a date">{ this.datePickerObj.getDate().toDateString() }</a>
-                        <a href="#" onclick={ setTodaysDate } title="set to today's date"><i class="fa fa-fw fa-bullseye"></i></a>
-                        <a href="#" onclick={ shiftDayForward } title="next day"><i class="fa fa-fw fa-arrow-circle-right"></i></a>
+                        <a onclick={ shiftDayBackward } title="previous day"><i class="fa fa-fw fa-arrow-circle-left"></i></a>
+                        <a id="datePicker" title="pick a date">{ this.datePickerObj.getDate().toDateString() }</a>
+                        <a onclick={ setTodaysDate } title="set to today's date"><i class="fa fa-fw fa-bullseye"></i></a>
+                        <a onclick={ shiftDayForward } title="next day"><i class="fa fa-fw fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -62,7 +62,7 @@
                             <span class="label label-primary" title="{ item.nutrition[0] } kilo calories">{ item.nutrition[0] } kcal</span>
                             <span class="label label-info" title="{ item.nutrition[1] } protein units">{ item.nutrition[1] } u</span>
                         </td>
-                        <td><a href="#"><i class="fa fa-fw fa-edit"></i></a><a href="#" onclick={ removeItem }><i class="fa fa-fw fa-times-circle-o"></i></a></td>
+                        <td><a><i class="fa fa-fw fa-edit"></i></a><a onclick={ removeItem }><i class="fa fa-fw fa-times-circle-o"></i></a></td>
                     </tr>
                 </tbody>
             </table>

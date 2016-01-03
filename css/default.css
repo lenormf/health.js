@@ -11,6 +11,10 @@
     font-family: "Abel", sans-serif;
 }
 
+a {
+    cursor: pointer;
+}
+
 #infoPanel .col-sm-6 {
     padding-left: 0;
     padding-right: 0;
