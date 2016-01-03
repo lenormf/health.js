@@ -69,15 +69,22 @@
         </div>
     </div>
 
+    // Callback called when a date is picked on the calendar
+    // This function is declared above the variables so that the `datePickerObj` can use it as a callback for the `onSelect` event
+    // Another solution would be to use a clojure, which would in turn force us to backup `this` into a variable before the declaration of `datePickerObj`
+    // We force the update of the view in that backup so that items are displayed when the current timestamp returned by `nowTimestamp` changes too
+    onSelectDatePicker(date) {
+        this.datePicker.innerHTML = date.toDateString()
+        this.update()
+    }
+
     this.DB = opts.DB
     this.dateNow = new Date()
     this.datePickerObj = new Pikaday({
         field: this.datePicker,
         setDefaultDate: true,
         defaultDate: this.dateNow,
-        onSelect: function (date) {
-            document.getElementById('datePicker').innerHTML = date.toDateString()
-        },
+        onSelect: this.onSelectDatePicker,
     })
     this.itemCategoriesRef = {
         "alcohol": "pe-is-f-beer-bottle-f",
