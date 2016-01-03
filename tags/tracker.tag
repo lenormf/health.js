@@ -8,10 +8,11 @@
                         <span class="label label-info" title="{ reducerProteins() } protein units">{ reducerProteins() } u</span>
                     </div>
 
-                    <div id="datePicker" class="col-sm-6">
-                        <a href="#" onclick={ shiftDayBackward }><i class="fa fa-fw fa-arrow-circle-left"></i></a>
-                        <a href="#">{ dateNow.toDateString() }</a>
-                        <a href="#" onclick={ shiftDayForward }><i class="fa fa-fw fa-arrow-circle-right"></i></a>
+                    <div id="datePickerWrapper" class="col-sm-6">
+                        <a href="#" onclick={ shiftDayBackward } title="previous day"><i class="fa fa-fw fa-arrow-circle-left"></i></a>
+                        <a id="datePicker" href="#" title="pick a date">{ this.datePickerObj.getDate().toDateString() }</a>
+                        <a href="#" onclick={ setTodaysDate } title="set to today's date"><i class="fa fa-fw fa-bullseye"></i></a>
+                        <a href="#" onclick={ shiftDayForward } title="next day"><i class="fa fa-fw fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -70,6 +71,14 @@
 
     this.DB = opts.DB
     this.dateNow = new Date()
+    this.datePickerObj = new Pikaday({
+        field: this.datePicker,
+        setDefaultDate: true,
+        defaultDate: this.dateNow,
+        onSelect: function (date) {
+            document.getElementById('datePicker').innerHTML = date.toDateString()
+        },
+    })
     this.itemCategoriesRef = {
         "alcohol": "pe-is-f-beer-bottle-f",
         "fruit": "pe-is-f-banana",
@@ -89,7 +98,7 @@
     }
 
     nowTimestamp() {
-        return parseInt(this.dateNow.getTime() / 1000 / 3600 / 24)
+        return parseInt(this.datePickerObj.getDate().getTime() / 1000 / 3600 / 24)
     }
 
     reducerCalories() {
@@ -104,12 +113,22 @@
         return items.length ? items.reduce((acc, cur) => acc + cur.nutrition[1], 0) : 0
     }
 
+    setTodaysDate(e) {
+        this.datePickerObj.setDate(this.dateNow)
+    }
+
     shiftDayBackward(e) {
-        this.dateNow.setDate(this.dateNow.getDate() - 1)
+        var now = this.datePickerObj.getDate()
+
+        now.setDate(now.getDate() - 1)
+        this.datePickerObj.setDate(now)
     }
 
     shiftDayForward(e) {
-        this.dateNow.setDate(this.dateNow.getDate() + 1)
+        var now = this.datePickerObj.getDate()
+
+        now.setDate(now.getDate() + 1)
+        this.datePickerObj.setDate(now)
     }
 
     resetItemForm() {

@@ -16,12 +16,12 @@
     padding-right: 0;
 }
 
-#infoPanel > #datePicker {
+#infoPanel > #datePickerWrapper {
     margin-top: .5em;
 }
 
 @media (min-width: 768px) {
-    #infoPanel > #datePicker {
+    #infoPanel > #datePickerWrapper {
         text-align: right;
         margin-top: 0;
     }
