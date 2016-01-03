@@ -11,6 +11,20 @@
     font-family: "Abel", sans-serif;
 }
 
+#newItemForm input#newItemName,
+#newItemForm select#newItemCategory,
+#newItemForm input#newItemCalories,
+#newItemForm input#newItemProteins {
+    width: 100%;
+}
+
+#newItemForm .col-sm-5,
+#newItemForm .col-sm-2,
+#newItemForm .col-sm-1 {
+    padding-left: 0;
+    padding-right: 0;
+}
+
 /* Bootstrap */
 body {
     background-color: #EEE;

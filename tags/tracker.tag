@@ -20,26 +20,26 @@
         </div>
 
         <div class="row-fluid">
-            <form class="form-inline" onsubmit={ addItem }>
-                <div class="form-group">
+            <form id="newItemForm" class="form-inline" onsubmit={ addItem }>
+                <div class="form-group col-sm-5">
                     <label class="sr-only" for="newItemName">item name</label>
                     <input type="text" class="form-control" id="newItemName" placeholder="item">
                 </div>
-                <div class="form-group">
+                <div class="form-group col-sm-2">
                     <label class="sr-only" for="newItemCategory"></label>
                     <select class="form-control" id="newItemCategory">
                         <option each={ category, _ in itemCategoriesRef }>{ category }</option>
                     </select>
                 </div>
-                <div class="form-group">
+                <div class="form-group col-sm-2">
                     <label class="sr-only" for="newItemCalories"></label>
                     <input type="number" class="form-control" id="newItemCalories" placeholder="calories (kcal)">
                 </div>
-                <div class="form-group">
+                <div class="form-group col-sm-2">
                     <label class="sr-only" for="newItemProteins"></label>
                     <input type="number" class="form-control" id="newItemProteins" placeholder="proteins (units)">
                 </div>
-                <button type="submit" class="btn btn-primary">add</button>
+                <button type="submit" class="btn btn-primary col-xs-12 col-sm-1">add</button>
             </form>
         </div>
 
