@@ -73,6 +73,14 @@
     this.itemCategoriesRef = {
         "alcohol": "pe-is-f-beer-bottle-f",
         "fruit": "pe-is-f-banana",
+        "vegetables": "pe-is-f-carrot",
+        "soda": "pe-is-f-can-2",
+        "cheese": "pe-is-f-cheese-1",
+        "meat": "pe-is-f-chicken-2",
+        "fish": "pe-is-f-fish-1",
+        "desserts": "pe-is-f-piece-of-cake-1",
+        "junk food": "pe-is-f-burger-2",
+        "candies": "pe-is-f-candy",
         "other": "pe-is-f-flatware-4",
     }
 
