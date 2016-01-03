@@ -122,12 +122,23 @@
             newItemCalories = this.newItemCalories.value,
             newItemProteins = this.newItemProteins.value
 
+        this.newItemName.parentNode.classList.remove('has-error');
+        this.newItemCalories.parentNode.classList.remove('has-error');
+        this.newItemProteins.parentNode.classList.remove('has-error');
+
         if (newItemName.length && newItemCategory && newItemCalories && newItemProteins) {
             newItemCalories = parseInt(newItemCalories, 10)
             newItemProteins = parseInt(newItemProteins, 10)
 
             this.DB.AddItem(this.nowTimestamp(), newItemName, newItemCategory, newItemCalories, newItemProteins)
             this.resetItemForm()
+        } else {
+            if (!newItemName)
+                this.newItemName.parentNode.classList.add('has-error');
+            if (!newItemCalories.length)
+                this.newItemCalories.parentNode.classList.add('has-error');
+            if (!newItemProteins.length)
+                this.newItemProteins.parentNode.classList.add('has-error');
         }
     }
 
