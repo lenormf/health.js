@@ -62,7 +62,10 @@
                 items.push({
                     item: item,
                     category: category,
-                    nutrition: [ calories, proteins ],
+                    nutrition: {
+                        "calories": calories,
+                        "proteins": proteins,
+                    },
                 });
                 this.SetItems(date, items);
             }
@@ -76,8 +79,8 @@
                 for (var i = 0; i < items.length; i++) {
                     if (items[i].item === item.item
                         && items[i].category === item.category
-                        && items[i].nutrition[0] === item.nutrition[0]
-                        && items[i].nutrition[1] === item.nutrition[1]) {
+                        && items[i].nutrition.calories === item.nutrition.calories
+                        && items[i].nutrition.proteins === item.nutrition.proteins) {
                         idx = i;
                         break;
                     }
