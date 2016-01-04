@@ -15,5 +15,5 @@
 * FIXED #food: display an error when item info is missing
 * #food: add more categories
 * #food: fix the overlay scrollbar on the table with low resolutions (wrap content onto the following line ?)
-* #food: add completion on the item names and autofill the form
+* FIXED #food: add completion on the item names and autofill the form
 * FIXED #food: display a dropdown type arrow on the category selector

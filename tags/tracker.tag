@@ -69,24 +69,51 @@
         </div>
     </div>
 
-    // Callback called when a date is picked on the calendar
-    // This function is declared above the variables so that the `datePickerObj` can use it as a callback for the `onSelect` event
-    // Another solution would be to use a clojure, which would in turn force us to backup `this` into a variable before the declaration of `datePickerObj`
-    // We force the update of the view in that backup so that items are displayed when the current timestamp returned by `nowTimestamp` changes too
-    onSelectDatePicker(date) {
-        this.datePicker.innerHTML = date.toDateString()
-        this.update()
+    var self = this
+
+    self.DB = opts.DB
+
+    self.dateNow = new Date()
+    self.datePickerObj = new Pikaday({
+        field: self.datePicker,
+        setDefaultDate: true,
+        defaultDate: self.dateNow,
+        onSelect: function (date) {
+            self.datePicker.innerHTML = date.toDateString()
+            self.update()
+            self.awesomplete.list = self.getTodaysItems()
+        },
+    })
+
+    nowTimestamp() {
+        return parseInt(self.datePickerObj.getDate().getTime() / 1000 / 3600 / 24)
     }
 
-    this.DB = opts.DB
-    this.dateNow = new Date()
-    this.datePickerObj = new Pikaday({
-        field: this.datePicker,
-        setDefaultDate: true,
-        defaultDate: this.dateNow,
-        onSelect: this.onSelectDatePicker,
+    getTodaysItems() {
+        return self.DB.GetItems(self.nowTimestamp()).map(function (cur, _, __) { return cur['item'] })
+    }
+
+    autoFillForm(e) {
+        var item = self.DB.GetItems(self.nowTimestamp()).find(function (cur, _, __) {
+            return cur['item'] === e.target.value
+        })
+
+        if (item) {
+            self.newItemCategory.value = item['category']
+            self.newItemCalories.value = item['nutrition'][0]
+            self.newItemProteins.value = item['nutrition'][1]
+        }
+    }
+
+    self.awesomplete = new Awesomplete(self.newItemName, {
+        list: self.getTodaysItems(),
+        minChars: 3,
+        maxItems: 5,
+        autoFirst: true,
     })
-    this.itemCategoriesRef = {
+    self.newItemName.addEventListener('awesomplete-selectcomplete', self.autoFillForm)
+
+    self.itemCategoriesRef = {
         "alcohol": "pe-is-f-beer-bottle-f",
         "fruit": "pe-is-f-banana",
         "vegetables": "pe-is-f-carrot",
@@ -101,74 +128,74 @@
     }
 
     categoryToIcon(category) {
-        return this.itemCategoriesRef[category]
-    }
-
-    nowTimestamp() {
-        return parseInt(this.datePickerObj.getDate().getTime() / 1000 / 3600 / 24)
+        return self.itemCategoriesRef[category]
     }
 
     reducerCalories() {
-        var items = this.DB.GetItems(this.nowTimestamp())
+        var items = self.DB.GetItems(self.nowTimestamp())
 
         return items.length ? items.reduce((acc, cur) => acc + cur.nutrition[0], 0) : 0
     }
 
     reducerProteins() {
-        var items = this.DB.GetItems(this.nowTimestamp())
+        var items = self.DB.GetItems(self.nowTimestamp())
 
         return items.length ? items.reduce((acc, cur) => acc + cur.nutrition[1], 0) : 0
     }
 
     setTodaysDate(e) {
-        this.datePickerObj.setDate(this.dateNow)
+        self.datePickerObj.setDate(self.dateNow)
+        self.awesomplete.list = self.getTodaysItems()
     }
 
     shiftDayBackward(e) {
-        var now = this.datePickerObj.getDate()
+        var now = self.datePickerObj.getDate()
 
         now.setDate(now.getDate() - 1)
-        this.datePickerObj.setDate(now)
+        self.datePickerObj.setDate(now)
+        self.awesomplete.list = self.getTodaysItems()
     }
 
     shiftDayForward(e) {
-        var now = this.datePickerObj.getDate()
+        var now = self.datePickerObj.getDate()
 
         now.setDate(now.getDate() + 1)
-        this.datePickerObj.setDate(now)
+        self.datePickerObj.setDate(now)
+        self.awesomplete.list = self.getTodaysItems()
     }
 
     resetItemForm() {
-        this.newItemName.value = this.newItemCategory.value = this.newItemCalories.value = this.newItemProteins.value = ''
+        self.newItemName.value = self.newItemCategory.value = self.newItemCalories.value = self.newItemProteins.value = ''
     }
 
     addItem(e) {
-        var newItemName = this.newItemName.value,
-            newItemCategory = this.newItemCategory.value,
-            newItemCalories = this.newItemCalories.value,
-            newItemProteins = this.newItemProteins.value
+        var newItemName = self.newItemName.value,
+            newItemCategory = self.newItemCategory.value,
+            newItemCalories = self.newItemCalories.value,
+            newItemProteins = self.newItemProteins.value
 
-        this.newItemName.parentNode.classList.remove('has-error');
-        this.newItemCalories.parentNode.classList.remove('has-error');
-        this.newItemProteins.parentNode.classList.remove('has-error');
+        self.newItemName.parentNode.classList.remove('has-error');
+        self.newItemCalories.parentNode.classList.remove('has-error');
+        self.newItemProteins.parentNode.classList.remove('has-error');
 
         if (newItemName.length && newItemCategory && newItemCalories && newItemProteins) {
             newItemCalories = parseInt(newItemCalories, 10)
             newItemProteins = parseInt(newItemProteins, 10)
 
-            this.DB.AddItem(this.nowTimestamp(), newItemName, newItemCategory, newItemCalories, newItemProteins)
-            this.resetItemForm()
+            self.DB.AddItem(self.nowTimestamp(), newItemName, newItemCategory, newItemCalories, newItemProteins)
+            self.resetItemForm()
         } else {
             if (!newItemName)
-                this.newItemName.parentNode.classList.add('has-error');
+                self.newItemName.parentNode.classList.add('has-error');
             if (!newItemCalories.length)
-                this.newItemCalories.parentNode.classList.add('has-error');
+                self.newItemCalories.parentNode.classList.add('has-error');
             if (!newItemProteins.length)
-                this.newItemProteins.parentNode.classList.add('has-error');
+                self.newItemProteins.parentNode.classList.add('has-error');
         }
     }
 
     removeItem(e) {
-        this.DB.RemoveItem(this.nowTimestamp(), e.item.item)
+        self.DB.RemoveItem(self.nowTimestamp(), e.item.item)
+        self.awesomplete.list = self.getTodaysItems()
     }
 </tracker>

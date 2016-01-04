@@ -45,6 +45,44 @@ a {
     padding-right: 0;
 }
 
+/* Awesomplete */
+
+div.awesomplete {
+    display: inline;
+}
+
+div.awesomplete > ul > li[aria-selected="true"] {
+    background-color: #F5F5F5;
+    color: #212121;
+}
+
+div.awesomplete > ul > li:hover {
+    background-color: #F5F5F5;
+}
+
+div.awesomplete li[aria-selected="true"] mark {
+    background: #FF8000;
+    color: #FFF;
+}
+
+div.awesomplete mark,
+div.awesomplete li:hover mark {
+    background-color: #3AF;
+}
+
+div.awesomplete > ul {
+    transition: none;
+}
+
+div.awesomplete > ul {
+    border-radius: 4px;
+    background: #FFF;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #CCC #CCC #BBB;
+    box-shadow: 0px 5px 15px -5px rgba(0, 0, 0, 0.5);
+}
+
 /* Bootstrap */
 body {
     background-color: #EEE;
