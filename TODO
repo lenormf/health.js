@@ -1,7 +1,9 @@
 * use the style editor to download a customized version of bootstrap (colors, fonts, spacing etc)
-* only include elements we need in the local bootstrap (JS, CSS etc)
+* only include elements we need in bootstrap (JS, CSS etc) and the other frameworks
+* minify all the files used to make a release (CSS + JS)
 * compatibility with most popular mobile browsers
 * pre-compile riot tags (the docs say the gain is very very slim though)
+* write a README file
 
 * FIXED make a menu popup when pressing the bars icon
 * fix broken routing (mount/unmount etc)
@@ -14,4 +16,4 @@
 * #food: add more categories
 * #food: fix the overlay scrollbar on the table with low resolutions (wrap content onto the following line ?)
 * #food: add completion on the item names and autofill the form
-* #food: display a dropdown type arrow on the category selector
+* FIXED #food: display a dropdown type arrow on the category selector
