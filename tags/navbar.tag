@@ -1,8 +1,8 @@
 <navbar>
     <nav class="navbar navbar-default navbar-static-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/">health.js</a>
-            <a class="navbar-brand pull-right" href="#" onclick={ toggleMenu }>
+            <a class="navbar-brand" href="#tracker">health.js</a>
+            <a class="navbar-brand pull-right" onclick={ toggleMenu }>
                 <i class="fa fa-fw fa-bars"></i>
             </a>
         </div>
