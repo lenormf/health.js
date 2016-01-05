@@ -10,6 +10,7 @@
         ROUTES_AVAILABLE: [
             "tracker",
             "settings",
+            "backups",
         ],
         ROUTE: "tracker",
         SETTINGS: {

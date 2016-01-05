@@ -49,6 +49,11 @@ a {
     margin-top: .5em;
 }
 
+#saveDataPanel .panel-body,
+#restoreDataPanel .panel-body {
+    text-align: justify;
+}
+
 /* Awesomplete */
 
 div.awesomplete {
