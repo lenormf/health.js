@@ -10,7 +10,7 @@
 
                     <div id="datePickerWrapper" class="col-sm-6">
                         <a onclick={ shiftDay(-1) } title="previous day"><i class="fa fa-fw fa-arrow-circle-left"></i></a>
-                        <a id="datePicker" title="pick a date">{ this.datePickerObj.getDate().toDateString() }</a>
+                        <a id="datePicker" title="pick a date">{ datePickerObj.getDate().toDateString() }</a>
                         <a onclick={ setTodaysDate } title="set to today's date"><i class="fa fa-fw fa-bullseye"></i></a>
                         <a onclick={ shiftDay(+1) } title="next day"><i class="fa fa-fw fa-arrow-circle-right"></i></a>
                     </div>
@@ -183,11 +183,11 @@
             newItemProteins = self.newItemProteins.value
 
         // If the fields were highlighted previously because of an error, remove the highlighting
-        self.newItemName.parentNode.classList.remove('has-error');
-        self.newItemCalories.parentNode.classList.remove('has-error');
-        self.newItemProteins.parentNode.classList.remove('has-error');
+        self.newItemName.parentNode.classList.remove('has-error')
+        self.newItemCalories.parentNode.classList.remove('has-error')
+        self.newItemProteins.parentNode.classList.remove('has-error')
 
-        if (newItemName.length && newItemCategory && newItemCalories && newItemProteins) {
+        if (newItemName && newItemCategory && newItemCalories && newItemProteins) {
             newItemCalories = parseInt(newItemCalories, 10)
             newItemProteins = parseInt(newItemProteins, 10)
 
@@ -195,11 +195,11 @@
             self.resetItemForm()
         } else {
             if (!newItemName)
-                self.newItemName.parentNode.classList.add('has-error');
-            if (!newItemCalories.length)
-                self.newItemCalories.parentNode.classList.add('has-error');
-            if (!newItemProteins.length)
-                self.newItemProteins.parentNode.classList.add('has-error');
+                self.newItemName.parentNode.classList.add('has-error')
+            if (!newItemCalories)
+                self.newItemCalories.parentNode.classList.add('has-error')
+            if (!newItemProteins)
+                self.newItemProteins.parentNode.classList.add('has-error')
         }
     }
 

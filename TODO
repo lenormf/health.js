@@ -6,7 +6,7 @@
 * write a README file
 
 * FIXED make a menu popup when pressing the bars icon
-* fix broken routing (mount/unmount etc)
+* FIXED fix broken routing (mount/unmount etc)
 * make fade-in transitions when the view changes
 * FIXED #food: when the screen size is very small (xs), the date is still aligned to the right although the rows expand on the entire screen
 * WONTFIX #food: the date and nutrition totals won't line up even when there's enough space for both to fit on the same line under small resolutions
@@ -17,3 +17,5 @@
 * #food: fix the overlay scrollbar on the table with low resolutions (wrap content onto the following line ?)
 * FIXED #food: add completion on the item names and autofill the form
 * FIXED #food: display a dropdown type arrow on the category selector
+* #food: allow edition of items
+* #food #settings: factorize handling of error classes (.has-error)

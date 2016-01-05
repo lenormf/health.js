@@ -7,30 +7,40 @@
 
 (function () {
     const DEFAULT = {
+        ROUTE_AVAILABLE: [
+            "tracker",
+            "settings",
+        ],
         ROUTE: "tracker",
         SETTINGS: {
             gender: "male",
             age: 25,
-            weight: 180,
             height: 6.4,
+            weight: 180.5,
         },
     };
-    var settings = window.healthDatabase.GetSettings();
+    const DB = window.healthDatabase;
 
-    if (!settings) {
-        settings = DEFAULT.SETTINGS;
-        window.healthDatabase.SetSettings(settings);
-    }
+    if (!DB.GetSettings())
+        DB.SetSettings(DEFAULT.SETTINGS.gender, DEFAULT.SETTINGS.age, DEFAULT.SETTINGS.height, DEFAULT.SETTINGS.weight);
 
     riot.compile(function () {
-        riot.route("tracker", function () {
-            riot.mount("navbar");
-            riot.mount("tracker", {
-                DB: window.healthDatabase,
-                SETTINGS: settings,
+        const view = document.getElementById("view");
+
+        riot.mount("navbar");
+        for (var route_idx in DEFAULT.ROUTE_AVAILABLE) {
+            const route = DEFAULT.ROUTE_AVAILABLE[route_idx];
+
+            // Each route has its own tag with the exact same name
+            riot.route(route, function () {
+                riot.mount(view, route, {
+                    DB: DB,
+                });
             });
-        });
+        }
+
         riot.route.start(true);
-        riot.route(DEFAULT.ROUTE);
+        if (!window.location.hash)
+            riot.route(DEFAULT.ROUTE);
     });
 })();

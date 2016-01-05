@@ -30,14 +30,14 @@
         },
         // gender: "male" or "female"
         // age: integer
-        // weight: float
         // height: float
-        SetSettings: function (gender, age, weight, height) {
+        // weight: float
+        SetSettings: function (gender, age, height, weight) {
             localStorageWrapper.setItem(PREFIX_DB + "settings", {
                 gender: gender,
                 age: age,
-                weight: weight,
                 height: height,
+                weight: weight,
             });
         },
         // date: timestamp (day, month and year only)
