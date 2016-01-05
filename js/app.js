@@ -7,7 +7,7 @@
 
 (function () {
     const DEFAULT = {
-        ROUTE_AVAILABLE: [
+        ROUTES_AVAILABLE: [
             "tracker",
             "settings",
         ],
@@ -28,15 +28,15 @@
         const view = document.getElementById("view");
 
         riot.mount("navbar");
-        for (var route_idx in DEFAULT.ROUTE_AVAILABLE) {
-            const route = DEFAULT.ROUTE_AVAILABLE[route_idx];
-
+        for (var route of DEFAULT.ROUTES_AVAILABLE) {
             // Each route has its own tag with the exact same name
-            riot.route(route, function () {
-                riot.mount(view, route, {
-                    DB: DB,
-                });
-            });
+            riot.route(route, (function (name_tag) {
+                return function () {
+                    riot.mount(view, name_tag, {
+                        DB: DB,
+                    });
+                }
+            })(route));
         }
 
         riot.route.start(true);
