@@ -177,15 +177,15 @@
 
     // Add an item with the given category/nutritional values when the form is submitted
     addItem(e) {
+        const els_error_prone = [ "newItemName", "newItemCalories", "newItemProteins" ]
         var newItemName = self.newItemName.value,
             newItemCategory = self.newItemCategory.value,
             newItemCalories = self.newItemCalories.value,
             newItemProteins = self.newItemProteins.value
 
         // If the fields were highlighted previously because of an error, remove the highlighting
-        self.newItemName.parentNode.classList.remove('has-error')
-        self.newItemCalories.parentNode.classList.remove('has-error')
-        self.newItemProteins.parentNode.classList.remove('has-error')
+        for (var input of els_error_prone)
+            self[input].parentNode.classList.remove('has-error')
 
         if (newItemName && newItemCategory && newItemCalories && newItemProteins) {
             newItemCalories = parseInt(newItemCalories, 10)
@@ -193,13 +193,13 @@
 
             self.DB.AddItem(self.nowTimestamp(), newItemName, newItemCategory, newItemCalories, newItemProteins)
             self.resetItemForm()
+            self.awesomplete.list = self.getTodaysItems()
         } else {
-            if (!newItemName)
-                self.newItemName.parentNode.classList.add('has-error')
-            if (!newItemCalories)
-                self.newItemCalories.parentNode.classList.add('has-error')
-            if (!newItemProteins)
-                self.newItemProteins.parentNode.classList.add('has-error')
+            for (var input of els_error_prone) {
+                if (!self[input].value) {
+                    self[input].parentNode.classList.add('has-error')
+                }
+            }
         }
     }
 

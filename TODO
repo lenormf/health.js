@@ -18,4 +18,4 @@
 * FIXED #food: add completion on the item names and autofill the form
 * FIXED #food: display a dropdown type arrow on the category selector
 * #food: allow edition of items
-* #food #settings: factorize handling of error classes (.has-error)
+* FIXED #food #settings: factorize handling of error classes (.has-error)

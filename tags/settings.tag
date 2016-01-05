@@ -54,14 +54,14 @@
     }
 
     updateSettings(e) {
+        const els_error_prone = [ "settingAge", "settingHeight", "settingWeight" ]
         var settingGender = this.settingGender.value,
             settingAge = this.settingAge.value,
             settingHeight = this.settingHeight.value,
             settingWeight = this.settingWeight.value
 
-        this.settingAge.parentNode.parentNode.classList.remove('has-error')
-        this.settingHeight.parentNode.parentNode.classList.remove('has-error')
-        this.settingWeight.parentNode.parentNode.classList.remove('has-error')
+        for (var input of els_error_prone)
+            this[input].parentNode.parentNode.classList.remove('has-error')
 
         if (settingAge && settingHeight && settingWeight) {
             settingAge = parseInt(settingAge, 10)
@@ -71,12 +71,11 @@
             this.DB.SetSettings(settingGender, settingAge, settingHeight, settingWeight)
             this.disactivateSaveButton()
         } else {
-            if (!settingAge)
-                this.settingAge.parentNode.parentNode.classList.add('has-error')
-            if (!settingHeight)
-                this.settingHeight.parentNode.parentNode.classList.add('has-error')
-            if (!settingWeight)
-                this.settingWeight.parentNode.parentNode.classList.add('has-error')
+            for (var input of els_error_prone) {
+                if (!self[input].value) {
+                    self[input].parentNode.parentNode.classList.add('has-error')
+                }
+            }
         }
     }
 </settings>
