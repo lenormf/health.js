@@ -33,6 +33,9 @@
     var getMetaIndexes = function () {
         return localStorageWrapper.getItem(PREFIX_DB + key_metaidx) || [];
     };
+    var setMetaIndexes = function (idxs) {
+        localStorageWrapper.setItem(PREFIX_DB + key_metaidx, idxs);
+    };
     var addMetaIndex = function (date) {
         var idxs = getMetaIndexes();
 
@@ -142,6 +145,16 @@
         RestoreBackup: function (backup) {
             if (typeof(backup) !== undefined) {
                 backup = JSON.parse(backup);
+
+                if (backup.meta.version !== VERSION_DB) {
+                    return false;
+                }
+
+                this.SetSettings(backup.settings);
+
+                for (var date in backup.items) {
+                    this.SetItems(date, backup.items[date]);
+                }
             }
         }
     };

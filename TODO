@@ -4,6 +4,7 @@
 * compatibility with most popular mobile browsers
 * pre-compile riot tags (the docs say the gain is very very slim though)
 * write a README file
+* write code that detects that the APIs used are supported (localStorage, FileReader etc)
 
 * FIXED make a menu popup when pressing the bars icon
 * FIXED fix broken routing (mount/unmount etc)

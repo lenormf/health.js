@@ -29,14 +29,16 @@
                     <div class="panel-body">
                         <div class="row-fluid">
                             <div class="col-sm-3" style="text-align: center;">
-                                <button class="btn btn-primary"><i class="fa fa-2x fa-cloud-upload"></i> restore</button>
+                                <button id="restoreBackupButton" class="btn btn-primary" onclick={ restoreBackupFromFile } disabled>
+                                    <i class="fa fa-2x fa-cloud-upload"></i> restore
+                                </button>
                             </div>
                             <div class="col-sm-8">
                                 <div class="row-fluid">
                                     Restore the database of items backed-up to a save file, including the settings
                                 </div>
                                 <div class="row-fluid">
-                                    <input type="file">
+                                    <input id="restoreFileInput" type="file" onchange={ enableRestoreBackupButton }>
                                 </div>
                             </div>
                         </div>
@@ -46,7 +48,9 @@
         </div>
     </div>
 
-    this.DB = opts.DB
+    var self = this
+
+    self.DB = opts.DB
 
     // https://developer.mozilla.org/en-US/docs/Web/API/WindowBase64/btoa
     function utf8_to_b64(str) {
@@ -56,5 +60,25 @@
         return decodeURIComponent(escape(window.atob(str)))
     }
 
-    this.downloadBackupButton.setAttribute("href", "data:application/octet-stream;charset=utf-16le;base64," + utf8_to_b64(this.DB.GetBackup()))
+    self.downloadBackupButton.setAttribute("href", "data:application/octet-stream;charset=utf-16le;base64," + utf8_to_b64(self.DB.GetBackup()))
+
+    enableRestoreBackupButton(e) {
+        if (self.restoreFileInput.value) {
+            self.restoreBackupButton.removeAttribute("disabled")
+        } else {
+            self.restoreBackupButton.setAttribute("disabled", true)
+        }
+    }
+
+    restoreBackupFromFile(e) {
+        if (self.restoreFileInput.files.length) {
+            var file = self.restoreFileInput.files[0]
+            var file_reader = new FileReader()
+
+            file_reader.onload = function (e) {
+                self.DB.RestoreBackup(e.target.result)
+            }
+            file_reader.readAsText(file)
+        }
+    }
 </backups>
