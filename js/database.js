@@ -150,7 +150,7 @@
                     return false;
                 }
 
-                this.SetSettings(backup.settings);
+                this.SetSettings(backup.settings.gender, backup.settings.age, backup.settings.height, backup.settings.weight);
 
                 for (var date in backup.items) {
                     this.SetItems(date, backup.items[date]);
