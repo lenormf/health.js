@@ -22,7 +22,7 @@
             <form id="newItemForm" class="form-inline" onsubmit={ addItem }>
                 <div class="form-group col-sm-5">
                     <label class="sr-only" for="newItemName">item name</label>
-                    <input type="text" class="form-control" id="newItemName" placeholder="item">
+                    <input id="newItemName" type="text" class="form-control" placeholder="item" oninput={ enableItemAddButton }>
                 </div>
                 <div class="form-group col-sm-2">
                     <label class="sr-only" for="newItemCategory"></label>
@@ -32,13 +32,13 @@
                 </div>
                 <div class="form-group col-sm-2">
                     <label class="sr-only" for="newItemCalories"></label>
-                    <input type="number" class="form-control" id="newItemCalories" placeholder="calories (kcal)">
+                    <input id="newItemCalories" type="number" class="form-control" placeholder="calories (kcal)" oninput={ enableItemAddButton }>
                 </div>
                 <div class="form-group col-sm-2">
                     <label class="sr-only" for="newItemProteins"></label>
-                    <input type="number" class="form-control" id="newItemProteins" placeholder="proteins (units)">
+                    <input id="newItemProteins" type="number" class="form-control" placeholder="proteins (units)" oninput={ enableItemAddButton }>
                 </div>
-                <button type="submit" class="btn btn-primary col-xs-12 col-sm-1">add</button>
+                <button id="itemAddButton" type="submit" class="btn btn-primary col-xs-12 col-sm-1" disabled>add</button>
                 <div class="clearfix"></div>
             </form>
         </div>
@@ -170,6 +170,14 @@
         }
     }
 
+    enableItemAddButton(e) {
+        if (self.newItemName.value && self.newItemCalories.value && self.newItemProteins.value) {
+            self.itemAddButton.removeAttribute("disabled")
+        } else {
+            self.itemAddButton.setAttribute("disabled", true)
+        }
+    }
+
     // Empty out the form that adds items
     resetItemForm() {
         self.newItemName.value = self.newItemCategory.value = self.newItemCalories.value = self.newItemProteins.value = ''
@@ -191,14 +199,20 @@
             newItemCalories = parseInt(newItemCalories, 10)
             newItemProteins = parseInt(newItemProteins, 10)
 
-            self.DB.AddItem(self.nowTimestamp(), newItemName, newItemCategory, newItemCalories, newItemProteins)
-            self.resetItemForm()
-            self.awesomplete.list = self.getTodaysItems()
+            if (newItemCalories < 0 || newItemProteins < 0) {
+                if (newItemCalories < 0)
+                    self.newItemCalories.parentNode.classList.add('has-error')
+                if (newItemProteins < 0)
+                    self.newItemProteins.parentNode.classList.add('has-error')
+            } else {
+                self.DB.AddItem(self.nowTimestamp(), newItemName, newItemCategory, newItemCalories, newItemProteins)
+                self.resetItemForm()
+                self.awesomplete.list = self.getTodaysItems()
+            }
         } else {
             for (var input of els_error_prone) {
-                if (!self[input].value) {
+                if (!self[input].value)
                     self[input].parentNode.classList.add('has-error')
-                }
             }
         }
     }
